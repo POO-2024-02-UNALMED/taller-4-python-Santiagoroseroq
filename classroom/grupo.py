@@ -1,9 +1,10 @@
 from classroom.asignatura import Asignatura
 
 class Grupo:
-    grado = None
+    grado = "Grado 12"
 
-    def __init__(self, grupo="grupo ordinado", asignaturas=None, estudiantes=None):
+
+    def __init__(self, grupo="grupo predeterminado", asignaturas=None, estudiantes=None):
         if asignaturas is None:
             asignaturas = []
         if estudiantes is None:
@@ -11,10 +12,11 @@ class Grupo:
         self._grupo = grupo
         self._asignaturas = asignaturas
         self.listadoAlumnos = estudiantes
+        self._imprimir_grado = False
 
-    def listadoAsignaturas(self, *args):
-        for x in args:
-            self._asignaturas.append(Asignatura(x, "Remoto"))
+    def listadoAsignaturas(self, **kwargs):
+        for x in kwargs.values():
+            self._asignaturas.append(Asignatura(x, "remoto"))
 
     def agregarAlumno(self, alumno, lista=None):
         if lista is None:
@@ -23,17 +25,11 @@ class Grupo:
         self.listadoAlumnos = self.listadoAlumnos + lista
 
     @classmethod
-    def asignarNombre(cls, nombre="Grado 10"):
-        cls.grado = nombre
-
-    @classmethod
     def asignarNombre(cls, nombre="Grado 6"):
         cls.grado = nombre
 
-    @classmethod
-    def asignarNombre(cls, nombre="Grado 12"):
-        cls.grado = nombre
-
     def __str__(self):
-        return f"Grupo de estudiantes: {self._grupo}\nGrado {self.grado}\n{self.listadoAlumnos}"
-
+        if self._imprimir_grado:
+            return f"Grupo de estudiantes: {self._grupo}\nGrado {self.grado}"
+        else:
+            return f"Grupo de estudiantes: {self._grupo}"
