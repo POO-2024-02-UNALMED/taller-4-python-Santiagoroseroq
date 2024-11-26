@@ -4,5 +4,6 @@ class Asignatura:
         self._nombre = nombre
         self._salon = salon
 
-    # def __str__(self):
-    #     pass
+    def __str__(self):
+        
+        return f"Asignatura: {self._nombre}, Salón: {self._salon}"
